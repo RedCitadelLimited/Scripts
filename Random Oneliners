@@ -1,0 +1,5 @@
+##QUick and dirty IP pinger in BASH for a /24 (reports only responsive IPs)
+for i in {1..255}; do ip=172.18.0.$i; ./ping -c 1 -W 1 "$ip" >/dev/null 2>&1 && echo "$ip"; done
+
+## Quick and dirty TCP Port scanner in BASH (reports only open ports)
+start=$(date +%s); echo "started: $(date)"; for p in {1..65535}; do timeout 0.1 bash -c "</dev/tcp/172.18.0.2/$p" 2>/dev/null && echo "open $p"; done; end=$(date +%s); echo "ended: $(date)"; echo "duration: $((end-start)) seconds"
